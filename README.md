@@ -11,7 +11,7 @@ Programa de terminal para gestionar listas de precios, creado para automatizar e
 ## 📦 Instalación
 1. Clona el repositorio:
    	`bash
-   	git clone [URL-de-tu-repositorio]
+   	git clone https://github.com/EliasYIZVZ/Programa-de-Gestion-de-Precios
 
 ##📝 Tecnologías
 ** Lenguaje: C (Standard)**
