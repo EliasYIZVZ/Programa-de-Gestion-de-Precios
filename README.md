@@ -13,8 +13,8 @@ Programa de terminal para gestionar listas de precios, creado para automatizar e
    	`bash
    	git clone https://github.com/EliasYIZVZ/Programa-de-Gestion-de-Precios
 
-##📝 Tecnologías
-** Lenguaje: C (Standard)**
+## 📝 Tecnologías
+**Lenguaje: C (Standard)**
 
 **Funcionalidades clave:**
 
