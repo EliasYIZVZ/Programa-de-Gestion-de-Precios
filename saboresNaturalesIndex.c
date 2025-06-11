@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define PRECIOBOLSA 200
 #define INCREMENTO_PORCENTUAL 0.5
 
 struct Producto
@@ -40,7 +39,7 @@ void muestraPrecios()
     fclose(FP);
 }
 
-void cargaPrecios()
+void cargaPrecios(int PRECIOBOLSA)
 {
     int i, opcion, costo;
     struct Producto X;
@@ -74,7 +73,7 @@ void cargaPrecios()
         printf("\nIngrese costo del producto para calcular precio: ");
         scanf("%d", &costo);
 
-        X.precio = (int)(costo * (1 + INCREMENTO_PORCENTUAL)) + PRECIOBOLSA;
+        X.precio = (int)((costo + PRECIOBOLSA) * (1 + INCREMENTO_PORCENTUAL)) ;
 
         fwrite(&X, sizeof(X), 1, FP);
 
@@ -92,7 +91,7 @@ void cargaPrecios()
     muestraPrecios();
 }
 
-void agregaProd()
+void agregaProd(int PRECIOBOLSA)
 {
     struct Producto AX;
     int opt;
@@ -127,7 +126,7 @@ void agregaProd()
         puts(AX.nombre);
         scanf("%d", &AX.precio);
 
-        AX.precio = (int)(AX.precio * (1 + INCREMENTO_PORCENTUAL)) + PRECIOBOLSA;
+        AX.precio = (int)((AX.precio + PRECIOBOLSA) * (1 + INCREMENTO_PORCENTUAL));
 
         fwrite(&AX, sizeof(AX), 1, FP);
 
@@ -147,7 +146,7 @@ void agregaProd()
     fclose(FP);
 }
 
-void modProd()
+void modProd(int PRECIOBOLSA)
 {
     struct Producto MX;
     int buscar, n, nuevo_costo;
@@ -200,7 +199,7 @@ void modProd()
     printf("\nINGRESE NUEVO COSTO: ");
     scanf("%d", &nuevo_costo);
 
-    MX.precio = (int)(nuevo_costo * (1 + INCREMENTO_PORCENTUAL)) + PRECIOBOLSA;
+    MX.precio = (int)((nuevo_costo + PRECIOBOLSA) * (1 + INCREMENTO_PORCENTUAL)) ;
 
     fseek(FPM, (long)-sizeof(MX), SEEK_CUR);
 
@@ -212,8 +211,15 @@ void modProd()
 int main()
 {
     int opcion;
+    int PRECIOBOLSA;
 
     printf("\n\n\t\tESTE ES EL PROGRAMA DE GESTION DE PRECIOS\n");
+
+    printf("\nIngrese el precio del packaging (BOLSA O ZIPLOC):\n");
+    while(scanf("%d", &PRECIOBOLSA)!=1){
+    printf("\n\tINCORRECTO. REINGRESE MONTO\n");
+    while(getchar() != '\n');
+    }
 
     printf("\nIngrese una opcion: \n");
     printf("\n1-----MOSTRAR LISTA ACTUAL");
@@ -243,17 +249,18 @@ int main()
             break;
 
         case 2:
-            cargaPrecios();
+            cargaPrecios(PRECIOBOLSA);
             break;
 
         case 3:
-            agregaProd();
+            agregaProd(PRECIOBOLSA);
             break;
 
         case 4:
-            modProd();
+            modProd(PRECIOBOLSA);
             break;
         }
+
 
         printf("\nIngrese una opcion: \n");
         printf("\n1-----MOSTRAR LISTA ACTUAL");
